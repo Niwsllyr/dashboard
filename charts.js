@@ -1,33 +1,13 @@
 let barChart;
 let slaDriverChart;
 
-export function renderCharts(data, mode = 'default') {
+export function renderCharts(data) {
 
   if (barChart) barChart.destroy();
   if (slaDriverChart) slaDriverChart.destroy();
 
-  /* ===============================
-     🔤 STATUS DOS PEDIDOS
-  =============================== */
-  const statusLabelsMap = {
-    Delivered: 'Entregue',
-    Delivering: 'Em Rota',
-    Hub_Assigned: 'Hub Atribuído',
-    Hub_Received: 'Recebido no Hub',
-    LM_Hub_InTransit: 'Em Transferência',
-    OnHold: 'Ocorrência'
-  };
-
-  const filteredStatus = Object.entries(data.statusMap)
-    .filter(([status]) => status && status !== 'undefined');
-
-  const statusLabels = filteredStatus.map(
-    ([status]) => statusLabelsMap[status] || status
-  );
-
-  const statusValues = filteredStatus.map(
-    ([, value]) => value
-  );
+  const statusLabels = Object.keys(data.statusMap);
+  const statusValues = Object.values(data.statusMap);
 
   barChart = new Chart(document.getElementById('barChart'), {
     type: 'bar',
@@ -36,17 +16,36 @@ export function renderCharts(data, mode = 'default') {
       datasets: [{
         label: 'Status dos Pedidos',
         data: statusValues,
-        backgroundColor: '#ff0000'
+        backgroundColor: '#2563eb'
       }]
     },
     options: {
       responsive: true,
-      maintainAspectRatio: false,
-      scales: {
-        y: { beginAtZero: true }
-      }
+      maintainAspectRatio: false
     }
   });
+
+  slaDriverChart = new Chart(document.getElementById('pieChart'), {
+    type: 'bar',
+    data: {
+      labels: data.driverSLA.map(d => d.name),
+      datasets: [{
+        label: 'SLA %',
+        data: data.driverSLA.map(d => d.sla),
+        backgroundColor: data.driverSLA.map(d =>
+          d.sla >= 98 ? '#16a34a' :
+          d.sla >= 95 ? '#eab308' :
+          '#dc2626'
+        )
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      maintainAspectRatio: false
+    }
+  });
+}
 
   /* ===============================
      🟢 SLA POR ENTREGADOR (TODOS)
