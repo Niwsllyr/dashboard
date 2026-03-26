@@ -6,8 +6,8 @@
 
 body{
   font-family:'Inter',sans-serif;
-  background:#ffffff;
-  color:#0f172a;
+  background:#f5f5f5; /* fundo cinza claro */
+  color:#212121; /* cinza escuro */
   overflow:hidden;
 }
 
@@ -46,7 +46,7 @@ body{
 
 .title-group span{
   font-size:20px;
-  color:#64748b;
+  color:#757575; /* cinza médio */
 }
 
 .actions{
@@ -57,23 +57,23 @@ body{
 .nav{
   padding:8px 18px;
   border-radius:20px;
-  border:1px solid #2563eb;
+  border:1px solid #ee4d2d; /* laranja Shopee */
   background:transparent;
-  color:#0f172a;
+  color:#ee4d2d;
   cursor:pointer;
   transition:.2s;
 }
 
 .nav.active,
 .nav:hover{
-  background:#2563eb;
+  background:#ee4d2d;
   color:#ffffff;
 }
 
 .print{
   padding:8px 20px;
   border-radius:20px;
-  background:#16a34a;
+  background:#ff7337; /* laranja secundário */
   border:none;
   font-weight:600;
   cursor:pointer;
@@ -96,18 +96,18 @@ body{
 
 .uploads label{
   font-size:11px;
-  color:#2563eb;
+  color:#ee4d2d;
   display:block;
   margin-bottom:4px;
 }
 
 input[type="file"],
 select{
-  background:#f1f5f9;
-  border:1px solid #2563eb;
+  background:#ffffff;
+  border:1px solid #ee4d2d;
   border-radius:12px;
   padding:6px 10px;
-  color:#0f172a;
+  color:#212121;
   font-size:12px;
 }
 
@@ -134,8 +134,8 @@ select{
 }
 
 .kpi{
-  background:#f8fafc;
-  border:1px solid #2563eb;
+  background:#ffffff;
+  border:1px solid #ee4d2d;
   border-radius:14px;
   padding:15px;
   display:flex;
@@ -145,7 +145,7 @@ select{
 
 .kpi span{
   font-size:11px;
-  color:#64748b;
+  color:#757575;
   text-transform:uppercase;
 }
 
@@ -154,9 +154,9 @@ select{
   margin-top:6px;
 }
 
-.kpi.sla-green strong{color:#16a34a;}
-.kpi.sla-yellow strong{color:#eab308;}
-.kpi.sla-red strong{color:#dc2626;}
+.kpi.sla-green strong{color:#22c55e;}
+.kpi.sla-yellow strong{color:#f59e0b;}
+.kpi.sla-red strong{color:#ef4444;}
 
 /* ===== CHART GRID ===== */
 
@@ -167,15 +167,14 @@ select{
 }
 
 .card{
-  background:#f8fafc;
+  background:#ffffff;
   border-radius:18px;
   padding:20px;
-  border:1px solid #e2e8f0;
+  border:1px solid #e0e0e0;
   display:flex;
   align-items:center;
   justify-content:center;
 
-  /* 🔥 IMPORTANTE */
   overflow:hidden;
   position:relative;
 }
@@ -203,7 +202,7 @@ table{
 }
 
 thead{
-  background:#2563eb;
+  background:#ee4d2d;
   color:#ffffff;
 }
 
@@ -214,13 +213,12 @@ th,td{
 }
 
 tbody tr{
-  border-bottom:1px solid #e2e8f0;
+  border-bottom:1px solid #e0e0e0;
 }
 
-.sla-green{color:#16a34a;}
-.sla-yellow{color:#eab308;}
-.sla-red{color:#dc2626;}
-
+.sla-green{color:#22c55e;}
+.sla-yellow{color:#f59e0b;}
+.sla-red{color:#ef4444;}
 
 /* ===== RESPONSIVIDADE GLOBAL ===== */
 
@@ -228,7 +226,6 @@ body{
   overflow:auto;
 }
 
-/* Container mais fluido */
 .dashboard{
   padding:20px;
 }
@@ -294,6 +291,7 @@ body{
 .chart-grid .card{
   height:350px;
 }
+
 /* ===== TABELA RESPONSIVA ===== */
 
 .table-card{
