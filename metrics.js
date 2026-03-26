@@ -30,7 +30,7 @@ export function calculateMetrics(data) {
 '65320-000': 'Vitorino Freire'
   };
 
-  data.forEach(row => {
+ data.forEach(row => {
 
     const status = row['Status'];
     const driver = row['Driver Name'];
@@ -58,13 +58,20 @@ export function calculateMetrics(data) {
       delivered++;
     }
 
-    // ===== DRIVER =====
+    /* =========================
+       DRIVER
+    ========================= */
     if (driver) {
       if (!driverMap[driver]) {
         driverMap[driver] = { total: 0, delivered: 0 };
       }
 
-      if (statusLower !== 'onhold') {
+      // 🔥 SLA ignora OnHold | DS considera tudo
+      if (mode === 'SLA') {
+        if (statusLower !== 'onhold') {
+          driverMap[driver].total++;
+        }
+      } else {
         driverMap[driver].total++;
       }
 
@@ -73,13 +80,19 @@ export function calculateMetrics(data) {
       }
     }
 
-    // ===== CITY =====
+    /* =========================
+       CITY
+    ========================= */
     if (city) {
       if (!cityMapInternal[city]) {
         cityMapInternal[city] = { total: 0, delivered: 0 };
       }
 
-      if (statusLower !== 'onhold') {
+      if (mode === 'SLA') {
+        if (statusLower !== 'onhold') {
+          cityMapInternal[city].total++;
+        }
+      } else {
         cityMapInternal[city].total++;
       }
 
@@ -90,8 +103,20 @@ export function calculateMetrics(data) {
 
   });
 
-  const validBase = total - onHold;
+  /* =========================
+     🔥 DIFERENÇA PRINCIPAL
+  ========================= */
+
+  let validBase;
+
+  if (mode === 'SLA') {
+    validBase = total - onHold; // ignora OnHold
+  } else {
+    validBase = total; // DS considera tudo
+  }
+
   const pending = validBase - delivered;
+
   const sla = validBase > 0
     ? ((delivered / validBase) * 100).toFixed(2)
     : 0;
@@ -121,7 +146,7 @@ export function calculateMetrics(data) {
     delivered,
     pending,
     sla,
-    statusMap,   // 🔥 IMPORTANTE (seu gráfico precisa disso)
+    statusMap,
     driverSLA,
     citySLA
   };
