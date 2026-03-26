@@ -1,4 +1,4 @@
-export function calculateMetrics(data) {
+export function calculateMetrics(data, mode = 'SLA') {
 
   let total = 0;
   let delivered = 0;
@@ -8,12 +8,12 @@ export function calculateMetrics(data) {
   const driverMap = {};
   const cityMapInternal = {};
 
-  const cityMap = {
+ const cityMap = {
 '65413-000': 'Alto Alegre do Maranhão',
 '65700-000': 'Bacabal',
 '65723-000': 'Bernardo do Mearim',
 '65704-000': 'Bom Lugar',
-'65710-000': 'Conceição do Lago-Açu',
+'65340-000': 'Conceição do Lago-Açu',
 '65720-000': 'Igarapé Grande',
 '65715-000': 'Lago da Pedra',
 '65710-000': 'Lago do Junco',
@@ -28,9 +28,9 @@ export function calculateMetrics(data) {
 '65470-000': 'São Mateus do Maranhão',
 '65727-000': 'Trizidela do Vale',
 '65320-000': 'Vitorino Freire'
-  };
+};
 
- data.forEach(row => {
+  data.forEach(row => {
 
     const status = row['Status'];
     const driver = row['Driver Name'];

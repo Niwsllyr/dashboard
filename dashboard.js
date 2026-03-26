@@ -18,12 +18,12 @@ let dsData = [];
 
 const META_SLA = 98;
 
-const cityMap = {
+  const cityMap = {
 '65413-000': 'Alto Alegre do Maranhão',
 '65700-000': 'Bacabal',
 '65723-000': 'Bernardo do Mearim',
 '65704-000': 'Bom Lugar',
-'65710-000': 'Conceição do Lago-Açu',
+'65340-000': 'Conceição do Lago-Açu',
 '65720-000': 'Igarapé Grande',
 '65715-000': 'Lago da Pedra',
 '65710-000': 'Lago do Junco',
@@ -38,7 +38,7 @@ const cityMap = {
 '65470-000': 'São Mateus do Maranhão',
 '65727-000': 'Trizidela do Vale',
 '65320-000': 'Vitorino Freire'
-};
+  };
 
 function getSlaClass(sla) {
   const v = parseFloat(sla);
