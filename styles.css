@@ -4,17 +4,22 @@
   box-sizing:border-box;
 }
 
+html, body{
+  height:100%;
+}
+
 body{
   font-family:'Inter',sans-serif;
-  background:linear-gradient(135deg,#fff6f2,#ffe9e1);
-  color:#212121;
+  background:#000000;
+  color:#f5f5f5;
   overflow:hidden;
 }
 
 /* ===== DASHBOARD ===== */
 
 .dashboard{
-  height:100vh;
+  min-height:100vh;
+  height:auto;
   display:flex;
   flex-direction:column;
   padding:20px 40px;
@@ -37,20 +42,20 @@ body{
 
 .logo{
   height:100px;
-  filter:drop-shadow(0 0 8px rgba(238,77,45,0.4));
+  filter:drop-shadow(0 0 8px rgba(255,0,0,0.3));
 }
 
 .title-group h1{
   font-size:40px;
   font-weight:700;
-  background:linear-gradient(90deg,#ee4d2d,#ff7337);
+  background:linear-gradient(90deg,#ff2a2a,#ff6b6b);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
 }
 
 .title-group span{
   font-size:20px;
-  color:#757575;
+  color:#aaa;
 }
 
 /* ===== BUTTONS ===== */
@@ -63,29 +68,29 @@ body{
 .nav{
   padding:8px 18px;
   border-radius:20px;
-  border:1px solid #ee4d2d;
-  background:rgba(255,255,255,0.7);
+  border:1px solid #ff2a2a;
+  background:rgba(255,255,255,0.05);
   backdrop-filter:blur(6px);
-  color:#ee4d2d;
+  color:#ff4d4d;
   cursor:pointer;
   transition:all .3s ease;
 }
 
 .nav:hover{
   transform:translateY(-2px);
-  box-shadow:0 6px 20px rgba(238,77,45,0.3);
+  box-shadow:0 6px 20px rgba(255,0,0,0.3);
 }
 
 .nav.active{
-  background:linear-gradient(135deg,#ee4d2d,#ff7337);
+  background:linear-gradient(135deg,#ff2a2a,#990000);
   color:#fff;
-  box-shadow:0 8px 25px rgba(238,77,45,0.4);
+  box-shadow:0 8px 25px rgba(255,0,0,0.4);
 }
 
 .print{
   padding:8px 20px;
   border-radius:20px;
-  background:linear-gradient(135deg,#ff7337,#ee4d2d);
+  background:linear-gradient(135deg,#ff3b3b,#990000);
   border:none;
   font-weight:600;
   cursor:pointer;
@@ -95,7 +100,7 @@ body{
 
 .print:hover{
   transform:translateY(-2px) scale(1.03);
-  box-shadow:0 10px 25px rgba(238,77,45,0.5);
+  box-shadow:0 10px 25px rgba(255,0,0,0.5);
 }
 
 /* ===== CONTROL BAR ===== */
@@ -114,23 +119,23 @@ body{
 
 .uploads label{
   font-size:11px;
-  color:#ee4d2d;
+  color:#ff4d4d;
   margin-bottom:4px;
 }
 
 input[type="file"],
 select{
-  background:#ffffff;
-  border:1px solid #ee4d2d;
+  background:#111;
+  border:1px solid #ff2a2a;
   border-radius:12px;
   padding:6px 10px;
-  color:#212121;
+  color:#f5f5f5;
   font-size:12px;
   transition:.3s;
 }
 
 input:hover, select:hover{
-  box-shadow:0 0 10px rgba(238,77,45,0.3);
+  box-shadow:0 0 10px rgba(255,0,0,0.3);
 }
 
 /* ===== MAIN GRID ===== */
@@ -140,6 +145,7 @@ input:hover, select:hover{
   display:grid;
   grid-template-rows:auto 1fr;
   gap:20px;
+  height:100%;
 }
 
 /* ===== KPI ===== */
@@ -151,7 +157,7 @@ input:hover, select:hover{
 }
 
 .kpi{
-  background:rgba(255,255,255,0.9);
+  background:rgba(255,255,255,0.05);
   backdrop-filter:blur(8px);
   border-radius:16px;
   padding:15px;
@@ -159,25 +165,36 @@ input:hover, select:hover{
   flex-direction:column;
   justify-content:center;
   transition:all .3s ease;
-  box-shadow:0 4px 15px rgba(0,0,0,0.05);
+  box-shadow:0 4px 15px rgba(0,0,0,0.6);
 }
 
 .kpi:hover{
   transform:translateY(-5px) scale(1.02);
-  box-shadow:0 12px 30px rgba(238,77,45,0.25);
+  box-shadow:0 12px 30px rgba(255,0,0,0.25);
 }
 
 .kpi span{
-  font-size:11px;
-  color:#757575;
-  text-transform:uppercase;
+  font-size: 11px;
+  text-transform: uppercase !important;
+  letter-spacing: 1px;
+  color: #888;
+  margin-bottom: 4px;
 }
 
 .kpi strong{
-  font-size:28px;
-  margin-top:6px;
+  font-size: 26px;
+  font-weight: 700;
+  color: #fff;
+  text-transform: none !important;
 }
 
+.kpi p {
+  font-size: 14px;
+  font-weight: 500;
+  color: #ccc;
+}
+
+/* SLA mantém */
 .kpi.sla-green strong{color:#22c55e;}
 .kpi.sla-yellow strong{color:#f59e0b;}
 .kpi.sla-red strong{color:#ef4444;}
@@ -188,10 +205,21 @@ input:hover, select:hover{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:20px;
+  height:100%;
 }
 
+/* 🔥 AGORA RESPONSIVO (SEM TRAVAR ALTURA) */
+.chart-grid .card{
+  height:100%;
+  min-height:350px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* CARD BASE */
 .card{
-  background:rgba(255,255,255,0.95);
+  background:rgba(255,255,255,0.05);
   border-radius:20px;
   padding:20px;
   display:flex;
@@ -200,17 +228,16 @@ input:hover, select:hover{
   position:relative;
   overflow:hidden;
 
-  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+  box-shadow:0 10px 30px rgba(0,0,0,0.7);
   transition:all .3s ease;
 }
 
-/* glow effect */
 .card::before{
   content:"";
   position:absolute;
   width:150%;
   height:150%;
-  background:radial-gradient(circle, rgba(238,77,45,0.15), transparent);
+  background:radial-gradient(circle, rgba(255,0,0,0.12), transparent);
   top:-50%;
   left:-50%;
   opacity:0;
@@ -223,10 +250,11 @@ input:hover, select:hover{
 
 .card:hover{
   transform:translateY(-6px);
-  box-shadow:0 20px 50px rgba(238,77,45,0.25);
+  box-shadow:0 20px 50px rgba(255,0,0,0.25);
 }
 
-.card canvas{
+/* 🔥 CANVAS OCUPA TUDO */
+.chart-grid canvas{
   width:100% !important;
   height:100% !important;
 }
@@ -237,8 +265,8 @@ input:hover, select:hover{
   height:100%;
   overflow:auto;
   border-radius:20px;
-  background:#fff;
-  box-shadow:0 10px 25px rgba(0,0,0,0.08);
+  background:#0d0d0d;
+  box-shadow:0 10px 25px rgba(0,0,0,0.8);
 }
 
 table{
@@ -247,7 +275,7 @@ table{
 }
 
 thead{
-  background:linear-gradient(135deg,#ee4d2d,#ff7337);
+  background:linear-gradient(135deg,#ff2a2a,#990000);
   color:#ffffff;
 }
 
@@ -258,12 +286,12 @@ th,td{
 }
 
 tbody tr{
-  border-bottom:1px solid #eee;
+  border-bottom:1px solid #222;
   transition:.2s;
 }
 
 tbody tr:hover{
-  background:rgba(238,77,45,0.08);
+  background:rgba(255,0,0,0.08);
 }
 
 /* ===== STATUS COLORS ===== */
@@ -325,7 +353,7 @@ body{
 }
 
 .chart-grid .card{
-  height:350px;
+  min-height:300px;
 }
 
 table{
@@ -349,4 +377,27 @@ table{
     padding:8px;
   }
 
+}
+
+canvas {
+  pointer-events: auto;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.export-mode .kpi,
+.export-mode .chart-container {
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+
+.export-mode .kpi span{
+  text-transform: uppercase !important;
+}
+
+.export-mode .kpi strong{
+  text-transform: none !important;
 }
