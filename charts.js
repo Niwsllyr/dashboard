@@ -31,11 +31,10 @@ export function renderCharts(data, mode = 'default', extra = {}) {
     ([, value]) => Number(value) || 0
   );
 
-  // 🔥 NOVO: CORES DINÂMICAS POR STATUS
   const statusColors = filteredStatus.map(([status]) => {
-    if (status === 'Delivered') return '#22c55e';   // verde
-    if (status === 'Delivering') return '#facc15';  // amarelo
-    return '#ef4444'; // vermelho para os outros
+    if (status === 'Delivered') return '#22c55e';
+    if (status === 'Delivering') return '#facc15';
+    return '#ef4444';
   });
 
   barChart = new Chart(document.getElementById('barChart'), {
@@ -45,19 +44,44 @@ export function renderCharts(data, mode = 'default', extra = {}) {
       datasets: [{
         label: 'Quantidade',
         data: statusValues,
-        backgroundColor: statusColors // 🔥 ALTERADO AQUI
+        backgroundColor: statusColors
       }]
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
+
+      // 🔥 CORREÇÃO AQUI
       interaction: {
-        mode: 'index',
-        intersect: false
+        mode: 'nearest',
+        intersect: true
       },
+      hover: {
+        mode: 'nearest',
+        intersect: true
+      },
+
       scales: {
         y: {
           beginAtZero: true
+        }
+      },
+
+      plugins: {
+        tooltip: {
+          enabled: true,
+          backgroundColor: '#ff6600',
+          titleColor: '#fff',
+          bodyColor: '#fff',
+          borderColor: '#ff6600',
+          borderWidth: 1,
+          padding: 10,
+          displayColors: false,
+          callbacks: {
+            label: function(context) {
+              return `📦 ${context.raw} pedidos`;
+            }
+          }
         }
       }
     }
@@ -95,9 +119,6 @@ const cityMap = {
   '65320-000': 'Vitorino Freire'
 };
 
-  /* ===============================
-     🔥 DS (AGORA POR CIDADE)
-  =============================== */
   if (mode === 'DS') {
 
     title = 'Performance por Cidade (%)';
@@ -112,10 +133,7 @@ const cityMap = {
       if (!city) return;
 
       if (!cityStats[city]) {
-        cityStats[city] = {
-          total: 0,
-          delivered: 0
-        };
+        cityStats[city] = { total: 0, delivered: 0 };
       }
 
       cityStats[city].total++;
@@ -151,9 +169,6 @@ const cityMap = {
     );
   }
 
-  /* ===============================
-     🔥 ONHOLD
-  =============================== */
   else if (selectedStatus === 'OnHold') {
 
     title = 'Ocorrências por Entregador (%)';
@@ -186,9 +201,6 @@ const cityMap = {
     colors = sorted.map(() => '#ef4444');
   }
 
-  /* ===============================
-     🔥 SLA (MANTIDO)
-  =============================== */
   else {
 
     title = 'SLA por Cidade (%)';
@@ -263,4 +275,3 @@ const cityMap = {
     }
   });
 }
-
